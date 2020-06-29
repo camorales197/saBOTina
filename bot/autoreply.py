@@ -24,10 +24,13 @@ def check_mentions(api, keywords, since_id):
 
             message_back = "Gracias por tu mensaje @" + tweet.author.screen_name
 
-            api.update_status(
+            try:
+                api.update_status(
                 status=message_back,
                 in_reply_to_status_id=tweet.id,
-            )
+                )
+            except tweepy.error.TweepError:
+                pass
     return new_since_id
 
 def main():
