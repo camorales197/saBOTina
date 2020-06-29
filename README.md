@@ -7,5 +7,5 @@ Este proyecto crea un bot de tweeter que genera texto al estilo del maestro Joaq
 https://twitter.com/JSaBOTina
 
 
-## Agradecimientos
+## Recursos utilizados
 https://realpython.com/twitter-bot-python-tweepy/ 
