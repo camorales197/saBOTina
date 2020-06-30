@@ -1,2 +1,5 @@
 python-dotenv
 tweepy
+numpy
+tensorflow==1.15
+setuptools==40.8.0

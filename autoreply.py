@@ -5,11 +5,17 @@ import tweepy
 import logging
 from config import create_api
 import time
+import sys
+sys.path.insert(0, 'modelo')
+from modelo import interactive_conditional_samples
+
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
-def check_mentions(api, keywords, since_id):
+whitelist = set('abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+
+def check_mentions(api, keywords, since_id, whitelist=whitelist):
     logger.info("Retrieving mentions")
     new_since_id = since_id
     for tweet in tweepy.Cursor(api.mentions_timeline, since_id=since_id).items():
@@ -22,22 +28,31 @@ def check_mentions(api, keywords, since_id):
             if not tweet.user.following:
                 tweet.user.follow()
 
-            message_back = "Gracias por tu mensaje @" + tweet.author.screen_name
+            mention = cleaning_mention(tweet.text)
+
+            text_answer = interactive_conditional_samples.interact_model(
+                text=mention,
+                length=200)[:279].split("<|endoftext|>")[0]
 
             try:
-                api.update_status(
-                status=message_back,
-                in_reply_to_status_id=tweet.id,
-                )
+                api.update_status(status=text_answer, in_reply_to_status_id=tweet.id)
+                print("tweet sent:", mention)
             except tweepy.error.TweepError:
+                print("Error sending the tweet")
                 pass
     return new_since_id
+
+def cleaning_mention(mention, whitelist=whitelist ):
+    clean_mention = ''.join(filter(whitelist.__contains__, mention))
+    return clean_mention
 
 def main():
     api = create_api()
     since_id = 1
     while True:
-        since_id = check_mentions(api, ["@JSaBOTina"], since_id)
+        #since_id = check_mentions(api, ["@JSaBOTina"], since_id)
+        since_id = check_mentions(api, [" "], since_id)
+
         logger.info("Waiting...")
         time.sleep(60)
 
