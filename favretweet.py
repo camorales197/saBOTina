@@ -26,10 +26,16 @@ class FavRetweetListener(tweepy.StreamListener):
                 tweet.favorite()
             except Exception as e:
                 logger.error("Error on fav", exc_info=True)
+            except tweepy.error.TweepError:
+                logger.error("Error on fav", exc_info=True)
+
+
+                pass
         if not tweet.retweeted:
             # Retweet, since we have not retweeted it yet
             try:
-                tweet.retweet()
+                x = 3
+                #tweet.retweet()
             except Exception as e:
                 logger.error("Error on fav and retweet", exc_info=True)
 
@@ -43,4 +49,4 @@ def main(keywords):
     stream.filter(track=keywords, languages=["es"])
 
 if __name__ == "__main__":
-    main(["sabina", "Joaquín Sabina"])
+    main(["Sabina", "Joaquín Sabina", "Serrat"])

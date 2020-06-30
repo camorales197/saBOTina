@@ -11,10 +11,11 @@ from modelo import interactive_conditional_samples
 import warnings
 
 
-warnings.filterwarnings("ignore")
-
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
+
+warnings.filterwarnings("ignore")
+
 
 def send_tweet(api, message):
     try:
@@ -30,9 +31,9 @@ def main():
     while True:
         text = interactive_conditional_samples.interact_model(
             text="Es una bonita mañana",
-            length=200)[:279].split("<|endoftext|>")[0]
+            length=200).split("<|endoftext|>")[0][:279].split("\n\n\n")[0]
         send_tweet(api=api, message=text)
-        time.sleep(30)
+        time.sleep(3600)
 
 if __name__ == "__main__":
     main()
