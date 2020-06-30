@@ -1,6 +1,12 @@
-# Bot Generador de citas de Joaquín Sabina
+# Joaquin Sabina AI Generated Quotes in a Tweeter Bot  
 
-Este proyecto crea un bot de tweeter que genera texto al estilo del maestro Joaquín Sabina.
+This projects aims to build a tweeter bot that shares Joaquin Sabina´s style AI generated quotes. 
+
+All the lyrics from the singer are downlaoded using Genius API.  
+
+Then, GPT-2 model is used for the text generation.
+
+
 
 ## Link
 
