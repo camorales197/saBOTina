@@ -32,7 +32,7 @@ def main():
             text="Es una bonita mañana",
             length=200)[:279].split("<|endoftext|>")[0]
         send_tweet(api=api, message=text)
-        time.sleep(360)
+        time.sleep(30)
 
 if __name__ == "__main__":
     main()
