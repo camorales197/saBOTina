@@ -30,7 +30,7 @@ def main():
     api = create_api()
     while True:
         text = interactive_conditional_samples.interact_model(
-            text="Es una bonita mañana",
+            text="Todo empezo. /n",
             length=200).split("<|endoftext|>")[0][:279].split("\n\n\n")[0]
         send_tweet(api=api, message=text)
         time.sleep(3600)

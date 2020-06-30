@@ -3,3 +3,8 @@ tweepy
 numpy
 tensorflow==1.15
 setuptools==40.8.0
+fire>=0.1.3
+regex==2017.4.5
+requests==2.21.0
+tqdm==4.31.1
+toposort==1.5

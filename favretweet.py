@@ -34,8 +34,7 @@ class FavRetweetListener(tweepy.StreamListener):
         if not tweet.retweeted:
             # Retweet, since we have not retweeted it yet
             try:
-                x = 3
-                #tweet.retweet()
+                tweet.retweet()
             except Exception as e:
                 logger.error("Error on fav and retweet", exc_info=True)
 
