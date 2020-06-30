@@ -6,6 +6,7 @@ All the lyrics from the singer are downlaoded using Genius API.
 
 Then, GPT-2 model is used for the text generation.
 
+![Example](example.png)
 
 
 ## Link
